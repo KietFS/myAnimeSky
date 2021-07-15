@@ -142,7 +142,8 @@ code {
 }
 .logout-button
 {
-  background-color: rgb(148, 148, 148);
+  font-family: Noto Sans;
+  background-color: #2F2F2F;
   color: white;
   font-weight: 700;
   width:100px;
@@ -151,8 +152,48 @@ code {
   border-radius: 10px;
 }
 .logout-button:hover{
+  color: black;
+  background-color:  #D9D9EB;
+}
+.shadow-box
+{
+  background: #FFFFFF;
+  box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+.slideButton {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px; 
+  color: black;
+  background-color: #ECECF6;
+}
+
+.slideButton:hover{
+  background-color: #2F2F2F;
+  color: white;
+}
+.usercard{
+  position: absolute;
+  top: 238px;
+  bottom: 400px;
+  right: 400px;
+  left: 400px;
+  z-index: 999;
+  font-family: Noto Sans;
+  margin: 0 auto;
+  width: 400px;
+  height: fit-content;
   background-color: white;
-  color: gray;
+  box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  border: 2px solid black;
+}
+
+.userimg{
+  border-radius: 50%;
 }
 @media(max-width: 1024px)
 {
