@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaSearch, FaSortAlphaDown } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import users from "../store/userInfo";
 import Lock from "../images/lock.svg";
 import Delete from "../images/delete.svg";
@@ -10,7 +10,7 @@ import UserBar from './UserBar';
 
 const UserManage:React.FC = () => {
     const [bars, setBars]=useState(users);
-    return (    
+        return (
         <>
         <section className="px-10">
             <div className="flex justify-between items-center mt-16">
@@ -38,7 +38,7 @@ const UserManage:React.FC = () => {
                     <h3 className="text-white">Hành động</h3>
                 </header>
                 {bars.map((bar)=>{
-                    return (
+                    return (   
                         <UserBar Id={bar.Id} Name={bar.Name} Avt={bar.Avt} Email={bar.Email}
                          updateDay={bar.updateDay} createDay={bar.createDay}
                           Status={bar.Status}  Animes={bar.Animes}

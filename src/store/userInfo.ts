@@ -95,7 +95,7 @@ const users:user[]=[
         Id: 6,
         Avt: img1,
         Name: 'Le Hai',
-        Email: 'haribeocutephomaique@gmail.com',
+        Email: 'haribeocute@gmail.com',
         FaceBook: 'Hải Lê',
         Status: false,
         Comments:301,

@@ -6,6 +6,8 @@ import { Bar } from 'react-chartjs-2';
 import CardImg from "../images/CardImg.svg";
 import {Button} from "@material-ui/core";
 import {useState} from "react";
+import {useEffect} from "react";
+import { current } from '@reduxjs/toolkit';
 type user ={
     Id:number;
     Avt: string;
@@ -39,12 +41,11 @@ type Props={
 
 
 const UserBar:React.FC<user> = ({Id, Avt, Name,  Email, FaceBook,  Status, Comments, Animes, Episodes, FollowingAnimes,  createDay,updateDay}) => {
-
     const [show,setShow]=useState(false);
     const [proper, setProper]=useState<user>({Id, Avt, Name,  Email, FaceBook,  Status, Comments, Animes, Episodes, FollowingAnimes,  createDay,updateDay});
     const UserCard:React.FC<Props> = (proper) => { 
         return (
-            <div className={`${
+            <div id="usercard-item" className={`${
                 show===false
                 ? "hidden"
                 : ""
@@ -111,26 +112,41 @@ const UserBar:React.FC<user> = ({Id, Avt, Name,  Email, FaceBook,  Status, Comme
                     </div>
     
                     <div className="mt-10 pl-2 pb-2 pr-2 flex justify-between">
-                    <Button variant="contained" color="secondary">Xóa tài khoản</Button>
+                    <Button variant="contained" color="secondary" onClick={()=>{deleteBar(Id)
+                    setShow(false)}}>Xóa tài khoản</Button>
                     <Button variant="contained" onClick={()=>setShow(false)}>Đóng</Button>
-                    <Button variant="contained">Khóa tài khoản</Button>
+                    <Button variant="contained" onClick={()=>Status=(!Status)}>Khóa tài khoản</Button>
                     </div>
             </div>
             </div>
         )
     }
-        
+
+    function filterBackground()
+    {
+        const element = document.getElementById("usercard");
+        element?.classList.add("filter-background");
+    }
+
+    function deleteBar(Id:number)
+    {
+        let tempElement = document.getElementById(Id.toString());
+        tempElement?.classList.add('notshow');
+    }
+
+
+
     return (
         <div>
             <UserCard />
-        <div key={Id} className="flex justify-between mt-5
+        <div key={Id}  id={Id.toString()} className="flex justify-between mt-5
         py-3 px-6 bg-white rounded-xl">
             <img src={Avt} alt="#" />
             <h3 className="mt-4 text-left w-48 text-sm">{Email}</h3>
             <h3 className="mt-4 text-left w-48 text-sm hidden">{Name}</h3>
             <h3 className="mt-4 mr-14 text-sm">{updateDay}</h3>
             <h3 className="mt-4 mr-10 text-sm">{createDay}</h3>
-            <h3 className={`
+            <h3  className={`
                 mt-4 text-sm
                 ${Status===true
                     ? "text-green-500 font-semibold mr-12"
@@ -147,9 +163,10 @@ const UserBar:React.FC<user> = ({Id, Avt, Name,  Email, FaceBook,  Status, Comme
                 <img src={ReSearch} className="cursor-pointer" onClick={()=>{
                     setShow(true);
                     setProper({Id, Avt, Name,  Email, FaceBook,  Status, Comments, Animes, Episodes, FollowingAnimes,  createDay,updateDay});
+                    filterBackground();
                     }} />
-                <img src={Lock} className="cursor-pointer"/>
-                <img src={Delete} className="cursor-pointer"  />
+                <img src={Lock} className="cursor-pointer" />
+                <img src={Delete} className="cursor-pointer" onClick={()=>deleteBar(Id)} />
             </div>
         </div>
         </div>

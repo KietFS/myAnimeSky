@@ -195,6 +195,18 @@ code {
 .userimg{
   border-radius: 50%;
 }
+
+.filter-background{
+  filter: contrast(180%);
+}
+
+.notshow{
+  display: none;
+}
+.space
+{
+  margin-right: 80px;
+}
 @media(max-width: 1024px)
 {
   .statics{
