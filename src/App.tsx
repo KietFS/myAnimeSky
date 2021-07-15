@@ -2,6 +2,7 @@ import React from 'react';
 import SideBar from './components/SideBar';
 import Homepage from "./components/Homepage";
 import "./index.css";
+import { UserPage } from './components/UserPage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,6 +18,9 @@ function App() {
         <Switch>
             <Route path="/" exact>
                 <Homepage />
+            </Route>
+            <Route path="/:userpage">
+                <UserPage />
             </Route>
         </Switch>
     </Router>
