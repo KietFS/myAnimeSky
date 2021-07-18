@@ -8,6 +8,9 @@ import {Button} from "@material-ui/core";
 import {useState} from "react";
 import {useEffect} from "react";
 import { current } from '@reduxjs/toolkit';
+import users from '../store/userInfo';
+import { create } from 'jss';
+import UserList from './UserList';
 type user ={
     Id:number;
     Avt: string;
@@ -37,7 +40,6 @@ type Props={
     createDay?: string;
     updateDay?: string;
 }
-
 
 
 const UserBar:React.FC<user> = ({Id, Avt, Name,  Email, FaceBook,  Status, Comments, Animes, Episodes, FollowingAnimes,  createDay,updateDay}) => {
@@ -122,16 +124,17 @@ const UserBar:React.FC<user> = ({Id, Avt, Name,  Email, FaceBook,  Status, Comme
         )
     }
 
-    function filterBackground()
-    {
-        const element = document.getElementById("usercard");
-        element?.classList.add("filter-background");
-    }
-
-    function deleteBar(Id:number)
-    {
-        let tempElement = document.getElementById(Id.toString());
-        tempElement?.classList.add('notshow');
+    function deleteBar(Id:number){
+        console.log(users);
+        let returnIndex:number;
+        users.map((user) => {
+            if (user.Id===Id)
+            {
+                returnIndex=user.Id;
+                users.splice(returnIndex,1);
+            }
+        })
+       const newUser:user[]=users;
     }
 
 
@@ -163,7 +166,6 @@ const UserBar:React.FC<user> = ({Id, Avt, Name,  Email, FaceBook,  Status, Comme
                 <img src={ReSearch} className="cursor-pointer" onClick={()=>{
                     setShow(true);
                     setProper({Id, Avt, Name,  Email, FaceBook,  Status, Comments, Animes, Episodes, FollowingAnimes,  createDay,updateDay});
-                    filterBackground();
                     }} />
                 <img src={Lock} className="cursor-pointer" />
                 <img src={Delete} className="cursor-pointer" onClick={()=>deleteBar(Id)} />
@@ -173,4 +175,4 @@ const UserBar:React.FC<user> = ({Id, Avt, Name,  Email, FaceBook,  Status, Comme
     );
 }
 
-export default UserBar
+export default UserBar;

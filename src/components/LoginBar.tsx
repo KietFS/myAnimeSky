@@ -8,10 +8,9 @@ import { selectUserEmail, selectUserName, selectUserPhoto, setUserLogin, setSign
 
 
 const LoginBar = () => {
-
-    const dispatch=useDispatch();
-    const userName = useSelector(selectUserName);
-    const userPhoto = useSelector(selectUserPhoto);
+    const dispatch=  useDispatch();
+    const userName=  useSelector(selectUserName);
+    const userPhoto= useSelector(selectUserPhoto);
 
 
     useEffect(()=>{
