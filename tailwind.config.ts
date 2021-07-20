@@ -4,6 +4,7 @@ module.exports = {
     './src/**/*.html',
     './src/**/*.vue',
     './src/**/*.jsx',
+    './src/**/*.tsx',
   ],
   theme: {},
   variants: {},
