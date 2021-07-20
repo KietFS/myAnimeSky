@@ -1,12 +1,6 @@
-// tailwind.config.js
-module.exports = {
-  purge: [
-    './src/**/*.html',
-    './src/**/*.vue',
-    './src/**/*.jsx',
-    './src/**/*.tsx',
-  ],
-  theme: {},
-  variants: {},
-  plugins: [],
+module.exports = { 
+  plugins: [
+      require("tailwindcss"),
+      require("autoprefixer")
+  ], 
 }
