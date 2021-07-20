@@ -21,7 +21,7 @@ const SideBar = () => {
       <ul className="nav-list mt-36 pt-7 items-center content-center">
       <NavLink to="/" exact><div  className="inner-icon"><li className="list-none my-5  cursor-pointer"> <img className="nav-item"  src={HomeIcon}/></li></div></NavLink>
       <NavLink to="/userpage"><div className="inner-icon" ><li className="list-none my-5  cursor-pointer"> <img  className="nav-item" src={Users}/> </li></div></NavLink>
-        <div className="inner-icon"><li className="list-none my-5  cursor-pointer"> <img  className="nav-item" src={Playlist}/></li></div>
+    <NavLink to="/animepage"><div className="inner-icon"><li className="list-none my-5  cursor-pointer"> <img  className="nav-item" src={Playlist}/></li></div></NavLink> 
         <div className="inner-icon"><li className="list-none my-5  cursor-pointer"> <img  className="nav-item" src={Connect}/> </li></div>
         <div className="inner-icon"><li className="list-none my-5  cursor-pointer"> <img className="nav-item" src={Settings}/></li></div>
       </ul>

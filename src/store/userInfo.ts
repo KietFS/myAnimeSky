@@ -1,5 +1,7 @@
+import { skipValidation } from "yargs";
 import img1 from "../images/AvtImg1.svg";
 import img2 from "../images/AvtImg2.svg";
+import thumbnail1 from "../images/thumbnail.svg";
 
 export type user ={
     Id:number;
@@ -8,6 +10,7 @@ export type user ={
     Email: string;
     FaceBook: string;
     Status: boolean;
+    Likes:number;
     Comments: number;
     Animes: number;
     Episodes: number;
@@ -15,6 +18,7 @@ export type user ={
     createDay: string;
     updateDay: string;
 }
+
 
 
 
@@ -26,6 +30,7 @@ const users:user[]=[
         Email: 'dungnguyen20802@gmail.com',
         FaceBook: 'Dũng Nguyễn',
         Status: true,
+        Likes: 143,
         Comments:143,
         Animes: 10,
         Episodes: 239,
@@ -41,6 +46,7 @@ const users:user[]=[
         Email: 'kietmakietna@gmail.com',
         FaceBook: 'Tuấn Kiệt',
         Status: true,
+        Likes: 59,
         Comments:101,
         Animes: 14,
         Episodes: 194,
@@ -56,6 +62,7 @@ const users:user[]=[
         Email: 'barokool@gmail.com',
         FaceBook: 'Baro Gia',
         Status: false,
+        Likes: 154,
         Comments:59,
         Animes: 21,
         Episodes: 576,
@@ -70,6 +77,7 @@ const users:user[]=[
         Email: 'johnmtfkg@gmail.com',
         FaceBook: 'Văn Đại',
         Status: false,
+        Likes: 45,
         Comments:3,
         Animes: 12,
         Episodes: 12,
@@ -84,6 +92,7 @@ const users:user[]=[
         Email: 'datnguyen2403@gmail.com',
         FaceBook: 'Đạt Nguyễn',
         Status: true,
+        Likes: 27,
         Comments:83,
         Animes: 6,
         Episodes: 96,
@@ -98,9 +107,10 @@ const users:user[]=[
         Email: 'haribeocute@gmail.com',
         FaceBook: 'Hải Lê',
         Status: false,
+        Likes: 202,
         Comments:301,
         Animes: 5,
-        Episodes: 40,
+        Episodes: 400,
         FollowingAnimes: 2,
         createDay:"1 tháng trước",
         updateDay:"2 ngày trước",
@@ -112,6 +122,7 @@ const users:user[]=[
         Email: 'hungdoan1234@gmail.com',
         FaceBook: 'Chấn Hưng',
         Status: true,
+        Likes: 209,
         Comments:20,
         Animes: 17,
         Episodes: 303,
@@ -125,6 +136,7 @@ const users:user[]=[
         Name: 'TS Jinky',
         Email: 'sieutran@gmail.com',
         FaceBook: 'Sieu Tran',
+        Likes: 103,
         Status: true,
         Comments:20,
         Animes: 17,
@@ -140,6 +152,7 @@ const users:user[]=[
         Email: 'vanhienlehcmute@gmail.com',
         FaceBook: 'Văn Hiền Lê',
         Status: false,
+        Likes: 86,
         Comments:122,
         Animes: 9,
         Episodes: 111,
@@ -154,6 +167,7 @@ const users:user[]=[
         Email: 'nhatanh140302@gmail.com',
         FaceBook: 'Nhat Anh',
         Status: true,
+        Likes: 302,
         Comments:9,
         Animes: 23,
         Episodes: 386,
@@ -162,7 +176,8 @@ const users:user[]=[
         updateDay:"1 ngày trước",
     },
    
-    
 ]
 
+
 export default users;
+

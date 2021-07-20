@@ -9,13 +9,15 @@ import Button from "@material-ui/core/Button"
 import CardImg from "../images/CardImg.svg";
 import { number } from 'yargs';
 import { stringify } from 'querystring';
-type user ={
-    Id:number;
-    Avt: string;
-    Name: string;
-    Email: string;
-    FaceBook: string;
-    Status: boolean;
+import { Bar } from 'react-chartjs-2';
+
+interface Props {
+    Id:number
+    Avt: string
+    Name: string
+    Email: string
+    FaceBook: string
+    Status: boolean
     Comments: number;
     Animes: number;
     Episodes: number;
@@ -24,7 +26,9 @@ type user ={
     updateDay: string;
 }
 
-interface Props {
+
+
+interface newProps {
     Id:number
     Avt: string
     Name: string
@@ -43,12 +47,29 @@ const UserManage:React.FC = () => {
     const [bars, setBars]=useState(users);
     const [show,setShow]=useState(false);
     const [proper, setProper]=useState<Props>();
-    
-    console.log(proper);
+    const [showConfirmBoard,setShowConfirmBoard]=useState(false);
+    const [showConfirmLockBoard,  setShowConfirmLockBoard]=useState(false);
+    const[keyword, setKeyword] = useState("");
+
+    const filterNames=users.filter(
+        (user)=>
+        user.Name.toLowerCase().includes(keyword))
+        
+        const onInputChange = (e:React.FormEvent<HTMLInputElement>)=>{
+            e.preventDefault();
+            setKeyword(e.currentTarget.value.toLowerCase());
+            if (e.currentTarget.value.toLowerCase())
+                setBars([...filterNames]);
+            else
+                setBars(users);
+        }
+
+        const searchClick = ()=>{
+
+            console.log(bars);
+        }
 
     const UserCard:React.FC<Props> = (proper) => { 
-    
-
         return (
             <div id="usercard-item" className={`${
                 show===false
@@ -63,11 +84,11 @@ const UserManage:React.FC = () => {
                     <h3 className="font-xl font-bold text-left ml-4">Thông tin cá nhân</h3>
                     <div className="flex mt-2 ml-4">
                         <h4 className="font-xl text-left ">Tên:</h4>
-                        <h4 className="font-xl text-left ml-20">{proper?.Name}</h4>
+                        <h4 className="font-xl text-left ml-20 ol-1">{proper?.Name}</h4>
                     </div>
                     <div className="flex mt-2 ml-4">
                         <h4 className="font-xl text-left ">Email:</h4>
-                        <h4 className="font-xl text-left ml-16">{proper?.Email}</h4>
+                        <h4 className="font-xl text-left ml-16 pl-1">{proper?.Email}</h4>
                     </div>
                     <div className="flex mt-2 ml-4">
                         <h4 className="font-xl text-left ">Facebook:</h4>
@@ -80,7 +101,7 @@ const UserManage:React.FC = () => {
                             ?"font-xl text-left font-semibold ml-10 text-green-500"
                             :"font-xl text-left font-semibold ml-10 text-red-500"
                         }`}>{`${
-                            proper==true
+                            proper.Status==true
                             ?"Đang hoạt động"
                             :"Đã bị khóa"
                         }`}</h4>
@@ -98,7 +119,7 @@ const UserManage:React.FC = () => {
                     </div>
                     <div className="flex mt-2 ml-4">
                         <h4 className="font-xl text-left ">Số tập đã xem</h4>
-                        <h4 className="font-xl text-left ml-16">  {proper?.Episodes}</h4>
+                        <h4 className="font-xl text-left ml-16 pl-1">  {proper?.Episodes}</h4>
                     </div>
                     <div className="flex mt-2 ml-4">
                         <h4 className="font-xl text-left ">Số Anime theo dõi:</h4>
@@ -118,12 +139,59 @@ const UserManage:React.FC = () => {
     
                     <div className="mt-10 pl-2 pb-2 pr-2 flex justify-between">
                     <Button variant="contained" color="secondary" onClick={()=>{
+                        deleteBar(proper?.Id);
                         setShow(false);
-                        deleteBar(proper?.Id as number);}}>Xóa tài khoản</Button>
-                    <Button variant="contained" onClick={()=>setShow(false)}>Đóng</Button>
-                    <Button variant="contained" onClick={()=>lockUser(proper?.Id, proper?.Status)} >Khóa tài khoản</Button>
+                        }}>Xóa tài khoản</Button>
+                    <div className="flex">
+                    <Button variant="contained" onClick={()=>setShow(false)}>Đóng</Button> 
+                    <div className="ml-2"><Button variant="contained" onClick={()=>lockUser(proper?.Id, proper?.Status)} >Khóa tài khoản</Button></div>
+                    </div>
                     </div>
             </div>
+            </div>
+        )
+    }
+
+    const ConfirmBoard:React.FC<Props> = (proper)=>{
+        return (
+
+            <div className={`${
+                showConfirmBoard===false
+                ? "hidden"
+                : ""
+            }`}>
+     
+                <div className="confirmboard" >
+                    <h2 className="font-xl font-bold">Xác nhận xóa</h2>
+                    <p className="text-xs text-gray-500 mt-1"> Bạn có chắc rằng muốn xóa người dùng {proper.Name as string} ?</p>
+                    <div className="float-right mt-20 flex">
+                        <Button variant="contained" onClick={()=>setShowConfirmBoard(false)}>Hủy Bỏ</Button>
+                        <div className="ml-2"><Button variant="contained" color="secondary" onClick={()=>{deleteBar(proper?.Id); 
+                            setShowConfirmBoard(false)}}>Đồng ý</Button></div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    const ConfirmLockBoard:React.FC<Props> = (proper)=>{
+        return (
+
+            <div className={`${
+                showConfirmLockBoard===false
+                ? "hidden"
+                : ""
+            }`}>
+     
+                <div className="confirmboard" >
+                    <h2 className="font-xl font-bold">Xác nhận  {`${proper.Status===true ? "khóa" : "gỡ khóa"}`} người dùng</h2>
+                    <p className="text-xs text-gray-500 mt-1"> Bạn có chắc rằng muốn {`${proper.Status===true ? "khóa" : "gỡ khóa"}`} người dùng {proper.Name as string} ?</p>
+                    <div className="float-right mt-20 flex">
+                        <Button variant="contained" onClick={()=>setShowConfirmLockBoard(false)}>Hủy Bỏ</Button>
+                        <div className="ml-2"><Button variant="contained" color="secondary" onClick={()=>{lockUser(proper?.Id, proper?.Status); 
+                            setShowConfirmLockBoard(false)}}>Đồng ý</Button></div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -131,8 +199,8 @@ const UserManage:React.FC = () => {
 
 
 
+
     function deleteBar(Id:number){
-        console.log(users);
         let returnIndex:number;
         users.map((user) => {
             if (user.Id===Id)
@@ -149,19 +217,17 @@ const UserManage:React.FC = () => {
         let returnIndexOfLock:number;
         users.map((user)=>{
             if (user.Id===Id){
-                user.Status=!Status;
+                user.Status=(!Status);
             }
         })
         setBars([...users]);
-
     }
 
-    useEffect(()=>{
 
-    },[bars]);
-
-
-
+    function sorted(){
+        users.sort((a,b)=>(a.Name > b.Name) ? 1 : -1);
+        setBars([...users]);
+      }
         return (
         <>
         <UserCard Id={ proper?.Id as number } Avt={proper?.Avt as string} 
@@ -171,24 +237,41 @@ const UserManage:React.FC = () => {
         Episodes={proper?.Episodes as number} FollowingAnimes={proper?.FollowingAnimes as number}
         createDay={proper?.createDay as string} updateDay={proper?.updateDay as string}
                     />
+        <ConfirmBoard Id={ proper?.Id as number } Avt={proper?.Avt as string} 
+        Email={proper?.Email as string} FaceBook={proper?.FaceBook as string} 
+        Status={proper?.Status as boolean} Comments={proper?.Comments as number}
+        Name={proper?.Name as string} Animes={proper?.Animes as number}
+        Episodes={proper?.Episodes as number} FollowingAnimes={proper?.FollowingAnimes as number}
+        createDay={proper?.createDay as string} updateDay={proper?.updateDay as string} />
+
+        <ConfirmLockBoard Id={ proper?.Id as number } Avt={proper?.Avt as string} 
+        Email={proper?.Email as string} FaceBook={proper?.FaceBook as string} 
+        Status={proper?.Status as boolean} Comments={proper?.Comments as number}
+        Name={proper?.Name as string} Animes={proper?.Animes as number}
+        Episodes={proper?.Episodes as number} FollowingAnimes={proper?.FollowingAnimes as number}
+        createDay={proper?.createDay as string} updateDay={proper?.updateDay as string} />
+
+
+
+
         <section className="px-10">
             <div className="flex justify-between items-center mt-16">
                 <h1 className="text-3xl font-semibold">Người dùng</h1>
                 <div className="flex items-center justify-center">
-                    <input className="search-bar" placeholder="Tìm kiếm" type="text"></input>
-                    <FaSearch className="search-icon" />
+                    <input className="search-bar" placeholder="Tìm kiếm theo tên" type="text" onChange={onInputChange}></input>
+                    <FaSearch className="search-icon cursor-pointer" onClick={()=>searchClick} />
                 </div>
             </div>
 
             <div className="mt-10">
-                <button className="flex items-center bg-gray-100 pl-2 pr-20 py-2 rounded ">
+                <button className="flex items-center bg-gray-100 pl-2 pr-20 py-2 rounded " onClick={()=>sorted()}>
                     <FaSortAlphaDown className="text-lg" />
                     <h3 className="font-semibold text-lg ml-5">Sắp xếp</h3>
                 </button>
             </div>
             
             <div className="mt-10 shadow-box">
-                <header className="flex items-center justify-between bg-gray-900 px-6 py-5 rounded-xl">
+                <header className="flex items-center justify-between bg-gray-900 px-6 py-5 rounded-b-none rounded-t-xl">
                     <h3 className="text-white">Avatar</h3>
                     <h3 className="text-white">Tài khoản</h3>
                     <h3 className="text-white">Vào lần cuối</h3>
@@ -199,7 +282,7 @@ const UserManage:React.FC = () => {
                 {bars.map((bar)=>{
 
                     return (   
-            <div key={bar.Id}  id={bar.Id.toString()} className="flex justify-between mt-5
+            <div key={bar.Id}  className="flex justify-between mt-5
             py-3 px-6 bg-white rounded-xl">
             <img src={bar.Avt} alt="#" />
             <h3 className="mt-4 text-left w-48 text-sm">{bar.Email}</h3>
@@ -220,13 +303,18 @@ const UserManage:React.FC = () => {
                 `}
             </h3>
             <div className="flex items-center relative right-0">
-                <img src={ReSearch} className="cursor-pointer"  
+                <img src={ReSearch} className="cursor-pointer" alt="/" 
                 onClick={()=>{
                     setShow(true);
                     setProper(bar);
                     }}  />
-                <img src={Lock} className="cursor-pointer" onClick={()=>lockUser(bar.Id, bar.Status)} />
-                <img src={Delete} className="cursor-pointer" onClick={()=>deleteBar(bar.Id)} />
+                <img src={Lock} className="cursor-pointer" alt="/" onClick={()=>{
+                    setShowConfirmLockBoard(true);
+                    setProper(bar);}} />
+                <img src={Delete} className="cursor-pointer" alt="/" onClick={()=>{
+                    setShowConfirmBoard(true);
+                    setProper(bar);
+                    }} />
             </div>
         </div>
                     )

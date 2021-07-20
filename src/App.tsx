@@ -1,6 +1,7 @@
 import React from 'react';
 import SideBar from './components/SideBar';
 import Homepage from "./components/Homepage";
+import AnimesPage from './components/AnimesPage';
 import "./index.css";
 import { UserPage } from './components/UserPage';
 import {
@@ -19,8 +20,11 @@ function App() {
             <Route path="/" exact>
                 <Homepage />
             </Route>
-            <Route path="/:userpage">
+            <Route path="/userpage">
                 <UserPage />
+            </Route>
+            <Route path="/animepage">
+                <AnimesPage />
             </Route>
         </Switch>
     </Router>

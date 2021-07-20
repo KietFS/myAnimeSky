@@ -1,18 +1,18 @@
 import React from 'react'
-import Summary from "./Summary";
-import AnimeList from "./AnimeList";
-const Homepage:React.FC = () => {
+import AnimeList from './AnimeList'
+import AnimeManage from './AnimeManage'
+const AnimesPage = () => {
     return (
         <div className="main-container">
             <div className="container middle">
-                <Summary />
+                <AnimeManage />
             </div>
+            
             <div className="container right">
                 <AnimeList />
             </div>
         </div>
-
     )
 }
 
-export default Homepage
+export default AnimesPage

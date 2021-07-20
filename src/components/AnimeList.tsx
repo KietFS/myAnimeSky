@@ -9,7 +9,7 @@ import MostViewsAnimed from "./MostViewsAnimes";
 import FirstImg from "../images/1.svg";
 import SecondImg from "../images/2.svg";
 import LoginBar from './LoginBar';
-const News = () => {
+const AnimeList = () => {
     return (
         <section className="pt-10">
             <LoginBar />
@@ -45,4 +45,4 @@ const News = () => {
     )
 }
 
-export default News
+export default AnimeList;

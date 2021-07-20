@@ -14,7 +14,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+input {
+  outline:none;
+ }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -191,7 +193,42 @@ code {
   border-radius: 8px;
   border: 2px solid black;
 }
+.confirmboard{
+  position: absolute;
+  top: 360px;
+  bottom: 400px;
+  right: 400px;
+  left: 300px;
+  z-index: 999;
+  font-family: Noto Sans;
+  padding: 20px;
+  margin: 0 auto;
+  width: 30%;
+  height: 200px;
+  background-color: white;
+  box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  border: 2px solid black;
+}
 
+.confirmboard-animepage{
+  position: absolute;
+  top: 360px;
+  bottom: 400px;
+  right: 400px;
+  left: 300px;
+  z-index: 999;
+  font-family: Noto Sans;
+  padding:20px;
+  margin: 0 auto;
+  width: 30%;
+  height: 210px;
+  background-color: white;
+  box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  border: 2px solid black;
+
+}
 .userimg{
   border-radius: 50%;
 }
