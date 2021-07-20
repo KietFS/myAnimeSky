@@ -1,7 +1,12 @@
-module.exports = { 
-  plugins: [
-      require("tailwindcss"),
-      require("autoprefixer"),
-      false,
-  ], 
+// tailwind.config.js
+module.exports = {
+  purge: {
+    mode: 'all',
+    preserveHtmlElements: false,
+    content: [
+      './src/**/*.js',
+      './node_modules/flatpickr/**/*.js',
+    ],
+  },
+  // ...
 }
