@@ -3,7 +3,7 @@ import Lock from "../images/lock.svg";
 import Delete from "../images/delete.svg";
 import ReSearch from "../images/userdetailsearch.svg"
 import { Bar } from 'react-chartjs-2';
-import CardImg from "../images/CardImg.svg";
+import CardImg from "../images/CardImg.jpg";
 import {Button} from "@material-ui/core";
 import {useState} from "react";
 import {useEffect} from "react";

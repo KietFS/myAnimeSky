@@ -6,10 +6,18 @@ import animes from '../store/animesInfo';
 import Lock from "../images/lock.svg";
 import Delete from "../images/delete.svg";
 import ReSearch from "../images/userdetailsearch.svg"
-import FirstImg from "../images/1.svg";
-import SecondImg from "../images/2.svg"
+import FirstImg from "../images/1.jpg";
+import SecondImg from "../images/2.jpg"
 import {Button} from "@material-ui/core";
-import CardImg from "../images/CardImg.svg";
+import CardImg from "../images/CardImg.jpg";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Paper from '@material-ui/core/Paper';
+import Draggable from 'react-draggable';
+import { Card } from '@material-ui/core';
 
 interface Props{
     Id: number;
@@ -42,8 +50,7 @@ const AnimeManage = () => {
     const [show,setShow]=useState(false);
     const [showConfirmBoard,setShowConfirmBoard]=useState(false);
     const [showConfirmLockBoard,  setShowConfirmLockBoard]=useState(false);
-    const[keyword, setKeyword] = useState("");
-
+    const [keyword, setKeyword] = useState("");
     const filterNames=animes.filter(
         (anime)=>
         anime.Name.toLowerCase().includes(keyword))
@@ -56,133 +63,159 @@ const AnimeManage = () => {
             else
                 setAnimeBar(animes);
         }
-
         const searchClick = ()=>{
 
             console.log(animeBars);
         }
+const handleOpenConfirmBoard = () => {
+        setShowConfirmBoard(true);
+        };
+const handleClosingConfirmBoard = () => {
+        setShowConfirmBoard(false);
+        };
+const handleOpenConfirmLockBoard = () => {
+        setShowConfirmLockBoard(true);
+        };
+const handleClosingConfirmLockBoard = () => {
+        setShowConfirmLockBoard(false);
+        };
+const handleOpen = () => {
+        setShow(true);
+        };
+const handleClosing = () => {
+        setShow(false);
+        };
 
-    const UserCard:React.FC<Props> = (proper) => { 
+
+    const Animecard:React.FC<Props> = (proper) => { 
         return (
-            <div id="usercard-item" className={`${
-                show===false
-                ? "hidden"
-                : ""
-            }`}>
-            <div className="usercard">
-                    <h2 className="font-xl font-bold text-center mt-2">Thông tin chi tiết</h2>
-                    <h3 className="font-xl font-bold text-left ml-4">Thumbnail</h3>
-                    <img src={CardImg}  className="userimg ml-36 "/>
-                <div className="">
-                    <h3 className="font-xl font-bold text-left ml-4">Thông tin cá nhân</h3>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Tên:</h4>
-                        <h4 className="font-xl text-left ml-20">{proper?.Name}</h4>
+            <div>
+              <Dialog
+                open={show}
+                onClose={handleClosing}
+                fullWidth
+                maxWidth="xs"
+              >
+                <DialogTitle style={{ cursor: 'move', textAlign:'center' }} id="draggable-dialog-title">
+                  Thông tin chi tiết
+                </DialogTitle>
+                <DialogContent>
+                    <h2 className="font-bold text-left text-lg">Avatar</h2>
+                        <img className="cardimage" src={CardImg} alt="/" />
+                    <h2 className="font-bold text-left text-lg mt-4">Thông tin Anime</h2>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Tên Anime: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Name as string}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Tác giả:</h4>
-                        <h4 className="font-xl text-left ml-14">{proper?.Author}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Thể loại: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Description as string}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Trạng thái</h4>
-                        <h4 className={`${
-                            proper.Status===true
-                            ?"font-xl text-left font-semibold ml-10 text-green-500"
-                            :"font-xl text-left font-semibold ml-10 text-yellow-500"
-                        }`}>{`${
-                            proper.Status===true
-                            ?"Hoàn thành"
-                            :"Đang cập nhật"
-                        }`}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Ngày tạo: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.createAt as string}</h3>
                     </div>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Trạng thái: </h3>
+                        <h3 className={`${proper.Status===true ? "text-left font-semibold mt-2 text-md text-green-500" : "text-left font-semibold mt-2 text-md text-yellow-500"}`}
+                        >{`${proper.Status===true ? "Đã hoàn thành" : "Đang cập nhật"}`}</h3>
                     </div>
-                    <div className="">
-                    <h3 className="font-xl font-bold text-left mt-4 ml-4">Chi tiết</h3>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Số comment</h4>
-                        <h4 className="font-xl text-left ml-20">{proper?.Comments}</h4>
+
+                    <h2 className="font-bold text-left text-lg mt-6">Chi tiết</h2>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Số comment: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Comments as number}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Số lượt Views:</h4>
-                        <h4 className="font-xl text-left ml-16 pl-1">{proper?.Views}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Số lượt xem: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Views as number}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Số tập đã cập nhật</h4>
-                        <h4 className="font-xl text-left ml-8 pl-1">  {proper?.Episodes}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Người tạo: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.createBy as string}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Tổng số tập:</h4>
-                        <h4 className="font-xl text-left ml-20 pl-1">{proper?.amoutEpisodes}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Người cập nhật: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.updateBy as string}</h3>
                     </div>
-                    <div className="mt-2 ml-4">
-                        <div className="flex mt-2">
-                            <h4 className="font-xl text-left ">Người tạo:</h4>
-                            <h4 className="font-xl text-left ml-20 pl-1">{proper?.createBy}</h4>
-                        </div>
-                        <div className="flex mt-2">
-                            <h4 className="font-xl text-left ">Người cập nhật:</h4>
-                            <h4 className="font-xl text-left ml-6 pl-5">{proper?.updateBy}</h4>
-                        </div>
-                    </div>
-                    </div>
-    
-                    <div className="mt-10 pl-2 pb-2 pr-2 flex justify-between">
-                    <Button variant="contained" color="secondary" onClick={()=>{
-                        deleteBar(proper?.Id);
-                        setShow(false);
-                        }}>Xóa Anime</Button>
-                    <div className="flex">
-                    <div className="mr-2 "><Button variant="contained" onClick={()=>lockUser(proper?.Id, proper?.Status)} >Khóa Anime</Button></div>
-                    <Button variant="contained" onClick={()=>setShow(false)}>Đóng</Button> 
-                    </div>
-                    </div>
+                </DialogContent>
+                <div className="mt-6">
+                <DialogActions>
+                <div className="mr-24 pr-2">
+                <Button autoFocus onClick={()=>{deleteBar(proper?.Id as number); handleClosing()}}color="secondary" variant="contained">
+                   Xóa Amime
+                  </Button>
+                  </div>
+                    
+                  <Button autoFocus onClick={handleClosing} color="default" variant="contained">
+                    Đóng
+                  </Button>
+                  <Button onClick={()=>{lockUser(proper?.Id as number, proper?.Status); handleClosing()}}  color="default" variant="contained">
+                    Khóa Anime
+                  </Button>
+                </DialogActions>
+                </div>
+              </Dialog>
             </div>
-            </div>
-        )
+          );
     }
 
-    const ConfirmBoard:React.FC<Props> = (proper)=>{
+    const  ConfirmBoard:React.FC<Props> = (proper) => {
         return (
+          <div>
+            <Dialog
+              open={showConfirmBoard}
+              onClose={handleClosingConfirmLockBoard}
+              fullWidth
+            >
+              <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                Xác nhận xóa Anime
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText className="text-sm text-gray-500">
+                  Bạn có chắc rằng muốn xóa anime {proper?.Name} ?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button autoFocus onClick={handleClosingConfirmBoard} color="default" variant="contained">
+                  Hủy bỏ
+                </Button>
+                <Button onClick={()=>{deleteBar(proper?.Id as number); handleClosingConfirmBoard()}} color="secondary" variant="contained">
+                  Đồng ý
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+        );
+      }
 
-            <div className={`${
-                showConfirmBoard===false
-                ? "hidden"
-                : ""
-            }`}>
-     
-                <div className="confirmboard-animepage" >
-                    <h2 className="font-xl font-bold">Xác nhận xóa</h2>
-                    <p className="text-xs text-gray-500 mt-1"> Bạn có chắc rằng muốn xóa Anime {proper.Name as string} ?</p>
-                    <div className="float-right mt-20 flex">
-                        <Button variant="contained" onClick={()=>setShowConfirmBoard(false)}>Hủy Bỏ</Button>
-                        <div className="ml-2"><Button variant="contained" color="secondary" onClick={()=>{deleteBar(proper?.Id); 
-                            setShowConfirmBoard(false)}}>Đồng ý</Button></div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    const ConfirmLockBoard:React.FC<Props> = (proper)=>{
+      const ConfirmLockBoard:React.FC<Props> = (proper)=>{
         return (
-
-            <div className={`${
-                showConfirmLockBoard===false
-                ? "hidden"
-                : ""
-            }`}>
-     
-                <div className="confirmboard-animepage" >
-                    <h2 className="font-xl font-bold">Xác nhận  {`${proper.Status===true ? "khóa" : "gỡ khóa"}`} Anime</h2>
-                    <p className="text-xs text-gray-500 mt-1"> Bạn có chắc rằng muốn {`${proper.Status===true ? "khóa" : "gỡ khóa"}`} Anime {proper.Name as string} ?</p>
-                    <div className="float-right mt-20 mb-12 flex">
-                        <Button variant="contained" onClick={()=>setShowConfirmLockBoard(false)}>Hủy Bỏ</Button>
-                        <div className="ml-2"><Button variant="contained" color="secondary" onClick={()=>{lockUser(proper?.Id, proper?.Status); 
-                            setShowConfirmLockBoard(false)}}>Đồng ý</Button></div>
-                    </div>
-                </div>
+            <div>
+              <Dialog
+                open={showConfirmLockBoard}
+                onClose={handleClosingConfirmBoard}
+                fullWidth
+              >
+                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                  Xác nhận khóa
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText className="text-sm text-gray-500">
+                    Bạn có chắc rằng muốn {`${proper?.Status===true ? "khóa " : "gỡ khóa "}`} anime {proper?.Name} ?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button autoFocus onClick={handleClosingConfirmLockBoard} color="default" variant="contained">
+                    Hủy bỏ
+                  </Button>
+                  <Button onClick={()=>{lockUser(proper?.Id as number, proper?.Status); handleClosingConfirmLockBoard()}} color="secondary" variant="contained">
+                    Đồng ý
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
-        )
+          );
     }
 
 
@@ -222,7 +255,7 @@ const AnimeManage = () => {
 
     return (
         <>
-        <UserCard Id={ proper?.Id as number } Thumbnail={proper?.Thumbnail as string} 
+        <Animecard Id={ proper?.Id as number } Thumbnail={proper?.Thumbnail as string} 
         japaneseName={proper?.japaneseName as string} Description={proper?.Description as string} 
         Status={proper?.Status as boolean} Comments={proper?.Comments as number}
         Views={proper?.Views as number} amoutEpisodes={proper?.amoutEpisodes as number}
@@ -285,8 +318,8 @@ const AnimeManage = () => {
                             <h3  className={`
                             mt-4 text-sm
                             ${animeBar.Status===false
-                            ? "text-yellow-500 font-semibold mr-32 pr-2"
-                            : "text-green-500 font-semibold mr-32 pr-6"
+                            ? "text-yellow-500 font-semibold w-32 mr-24 pr-2"
+                            : "text-green-500 font-semibold w-32 mr-24 pr-6"
                             }`}>
                             {`•
                              ${animeBar.Status===false

@@ -6,6 +6,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  max-height: 1640px;
+ 
 }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,6 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 input {
   outline:none;
@@ -80,6 +83,7 @@ code {
 }
 .app-container{
   display: flex;
+  margin-bottom: -150px;
 }
 
 .search-bar
@@ -121,6 +125,8 @@ code {
 
 .newsImg{
     margin: 0 auto;
+    border-radius: 20px;
+    background-color: transparent;
 
 }
 .center-text-in-grid
@@ -229,6 +235,9 @@ code {
   border: 2px solid black;
 
 }
+.cardimage{
+  margin: 0 auto;
+}
 .userimg{
   border-radius: 50%;
 }
@@ -264,5 +273,11 @@ code {
   }
   .static-children{
     margin-top: 20px;
+  }
+}
+@media(max-height: 1600px)
+{
+  body{
+    height: 1580px;
   }
 }

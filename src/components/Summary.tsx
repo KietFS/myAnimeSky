@@ -1,14 +1,14 @@
 import React from 'react'
 import "../index.css";
 import {FaSearch} from "react-icons/fa";
-import PlayButton from "../images/playButton.svg";
-import AmountUsers from "../images/amountUsers.svg";
-import AccessTime from "../images/accesTimes.svg";
-import Rating from "../images/rating.svg";
+import PlayButton from "../images/playButton.jpg";
+import AmountUsers from "../images/amountUsers.jpg";
+import AccessTime from "../images/acessTimes.jpg";
+import Rating from "../images/rating.jpg";
 import BarChart from './BarChart';
 import AnimeInfo from "./AnimeInfo";
-import FirstImg from "../images/1.svg";
-import SecondImg from "../images/2.svg";
+import FirstImg from "../images/1.jpg";
+import SecondImg from "../images/2.jpg";
 const Summary = () => {
     return (
         <section className="px-10">

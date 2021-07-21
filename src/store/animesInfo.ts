@@ -1,7 +1,7 @@
-import thumbnail1 from "../images/thumbnail.svg"
-import img1 from "../images/AvtImg1.svg"
-import FirstImg from "../images/1.svg";
-import SecondImg from "../images/2.svg";
+import thumbnail1 from "../images/thumbnail.jpg"
+import img1 from "../images/AvtImg1.jpg"
+import FirstImg from "../images/1.jpg";
+import SecondImg from "../images/2.jpg";
 
 export type anime = {
     Id: number;

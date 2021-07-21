@@ -6,10 +6,19 @@ import Lock from "../images/lock.svg";
 import Delete from "../images/delete.svg";
 import ReSearch from "../images/userdetailsearch.svg"
 import Button from "@material-ui/core/Button"
-import CardImg from "../images/CardImg.svg";
+import CardImg from "../images/CardImg.jpg";
 import { number } from 'yargs';
 import { stringify } from 'querystring';
 import { Bar } from 'react-chartjs-2';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Paper from '@material-ui/core/Paper';
+import Draggable from 'react-draggable';
+import { Card } from '@material-ui/core';
+
 
 interface Props {
     Id:number
@@ -50,7 +59,6 @@ const UserManage:React.FC = () => {
     const [showConfirmBoard,setShowConfirmBoard]=useState(false);
     const [showConfirmLockBoard,  setShowConfirmLockBoard]=useState(false);
     const[keyword, setKeyword] = useState("");
-
     const filterNames=users.filter(
         (user)=>
         user.Name.toLowerCase().includes(keyword))
@@ -69,131 +77,160 @@ const UserManage:React.FC = () => {
             console.log(bars);
         }
 
+    const handleOpenConfirmBoard = () => {
+      setShowConfirmBoard(true);
+    };
+  
+    const handleClosingConfirmBoard = () => {
+      setShowConfirmBoard(false);
+    };
+
+    const handleOpenConfirmLockBoard = () => {
+        setShowConfirmLockBoard(true);
+    };
+    
+      const handleClosingConfirmLockBoard = () => {
+        setShowConfirmLockBoard(false);
+    };
+    const handleOpen = () => {
+        setShow(true);
+    };
+    
+      const handleClosing = () => {
+        setShow(false);
+    };
+
+
     const UserCard:React.FC<Props> = (proper) => { 
         return (
-            <div id="usercard-item" className={`${
-                show===false
-                ? "hidden"
-                : ""
-            }`}>
-            <div className="usercard">
-                    <h2 className="font-xl font-bold text-center mt-2">Thông tin chi tiết</h2>
-                    <h3 className="font-xl font-bold text-left ml-4">Avatar</h3>
-                    <img src={CardImg}  className="userimg ml-36 "/>
-                <div className="">
-                    <h3 className="font-xl font-bold text-left ml-4">Thông tin cá nhân</h3>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Tên:</h4>
-                        <h4 className="font-xl text-left ml-20 ol-1">{proper?.Name}</h4>
+            <div>
+              <Dialog
+                open={show}
+                onClose={handleClosing}
+                fullWidth
+                maxWidth="xs"
+              >
+                <DialogTitle style={{ cursor: 'move', textAlign:'center' }} id="draggable-dialog-title">
+                  Thông tin chi tiết
+                </DialogTitle>
+                <DialogContent>
+                    <h2 className="font-bold text-left text-lg">Avatar</h2>
+                        <img className="cardimage" src={CardImg} alt="/" />
+                    <h2 className="font-bold text-left text-lg mt-4">Thông tin cá nhân</h2>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Tên: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Name as string}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Email:</h4>
-                        <h4 className="font-xl text-left ml-16 pl-1">{proper?.Email}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Email: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Email as string}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Facebook:</h4>
-                        <h4 className="font-xl text-left ml-10">{proper?.FaceBook}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">FaceBook: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.FaceBook as string}</h3>
                     </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Trạng thái</h4>
-                        <h4 className={`${
-                            proper.Status==true
-                            ?"font-xl text-left font-semibold ml-10 text-green-500"
-                            :"font-xl text-left font-semibold ml-10 text-red-500"
-                        }`}>{`${
-                            proper.Status==true
-                            ?"Đang hoạt động"
-                            :"Đã bị khóa"
-                        }`}</h4>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Trạng thái: </h3>
+                        <h3 className={`${proper.Status===true ? "text-left font-semibold mt-2 text-md text-green-500" : "text-left font-semibold mt-2 text-md text-red-500"}`}
+                        >{`${proper.Status===true ? "Đang hoạt động" : "Đã bị khóa"}`}</h3>
                     </div>
-                    </div>
-                    <div className="">
-                    <h3 className="font-xl font-bold text-left mt-4 ml-4">Chi tiết</h3>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Số comment</h4>
-                        <h4 className="font-xl text-left ml-20">{proper?.Comments}</h4>
-                    </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Số bộ Anime đã xem:</h4>
-                        <h4 className="font-xl text-left ml-4">{proper?.Animes}</h4>
-                    </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Số tập đã xem</h4>
-                        <h4 className="font-xl text-left ml-16 pl-1">  {proper?.Episodes}</h4>
-                    </div>
-                    <div className="flex mt-2 ml-4">
-                        <h4 className="font-xl text-left ">Số Anime theo dõi:</h4>
-                        <h4 className="font-xl text-left ml-8">{proper?.FollowingAnimes}</h4>
-                    </div>
-                    <div className="mt-2 ml-4">
-                        <div className="flex mt-2">
-                            <h4 className="font-xl text-left ">Ngày tạo</h4>
-                            <h4 className="font-xl text-left ml-20">{proper?.createDay}</h4>
-                        </div>
-                        <div className="flex mt-2">
-                            <h4 className="font-xl text-left ">Ngày cập nhật</h4>
-                            <h4 className="font-xl text-left ml-10">{proper?.updateDay}</h4>
-                        </div>
-                    </div>
-                    </div>
-    
-                    <div className="mt-10 pl-2 pb-2 pr-2 flex justify-between">
-                    <Button variant="contained" color="secondary" onClick={()=>{
-                        deleteBar(proper?.Id);
-                        setShow(false);
-                        }}>Xóa tài khoản</Button>
-                    <div className="flex">
-                    <Button variant="contained" onClick={()=>setShow(false)}>Đóng</Button> 
-                    <div className="ml-2"><Button variant="contained" onClick={()=>lockUser(proper?.Id, proper?.Status)} >Khóa tài khoản</Button></div>
-                    </div>
-                    </div>
-            </div>
-            </div>
-        )
-    }
 
-    const ConfirmBoard:React.FC<Props> = (proper)=>{
-        return (
-
-            <div className={`${
-                showConfirmBoard===false
-                ? "hidden"
-                : ""
-            }`}>
-     
-                <div className="confirmboard" >
-                    <h2 className="font-xl font-bold">Xác nhận xóa</h2>
-                    <p className="text-xs text-gray-500 mt-1"> Bạn có chắc rằng muốn xóa người dùng {proper.Name as string} ?</p>
-                    <div className="float-right mt-20 flex">
-                        <Button variant="contained" onClick={()=>setShowConfirmBoard(false)}>Hủy Bỏ</Button>
-                        <div className="ml-2"><Button variant="contained" color="secondary" onClick={()=>{deleteBar(proper?.Id); 
-                            setShowConfirmBoard(false)}}>Đồng ý</Button></div>
+                    <h2 className="font-bold text-left text-lg mt-6">Chi tiết</h2>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Số comment: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Comments as number}</h3>
                     </div>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Số bộ anime đã xem: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Animes as number}</h3>
+                    </div>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Số tập đã xem: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.Episodes as number}</h3>
+                    </div>
+                    <div className="flex justify-between" >
+                        <h3 className="text-left font-semibold mt-2 text-md">Số anime đang theo dõi: </h3>
+                        <h3 className="text-left font-semibold mt-2 text-md">{proper?.FollowingAnimes as number}</h3>
+                    </div>
+                </DialogContent>
+                <div className="mt-6">
+                <DialogActions>
+                <div className="mr-12">
+                <Button autoFocus onClick={()=>{deleteBar(proper?.Id as number); handleClosing()}}color="secondary" variant="contained">
+                   Xóa tài khoản
+                  </Button>
+                  </div>
+                    
+                  <Button autoFocus onClick={handleClosing} color="default" variant="contained">
+                    Đóng
+                  </Button>
+                  <Button onClick={()=>{lockUser(proper?.Id as number, proper?.Status); handleClosing()}}  color="default" variant="contained">
+                    Khóa tài khoản
+                  </Button>
+                </DialogActions>
                 </div>
+              </Dialog>
             </div>
-        )
+          );
     }
+
+
+   const  ConfirmBoard:React.FC<Props> = (proper) => {
+        return (
+          <div>
+            <Dialog
+              open={showConfirmBoard}
+              onClose={handleClosingConfirmLockBoard}
+              fullWidth
+            >
+              <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                Xác nhận xóa
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText className="text-sm text-gray-500">
+                  Bạn có chắc rằng muốn xóa người dùng {proper?.Name} ?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button autoFocus onClick={handleClosingConfirmBoard} color="default" variant="contained">
+                  Hủy bỏ
+                </Button>
+                <Button onClick={()=>{deleteBar(proper?.Id as number); handleClosingConfirmBoard()}} color="secondary" variant="contained">
+                  Đồng ý
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+        );
+      }
 
     const ConfirmLockBoard:React.FC<Props> = (proper)=>{
         return (
-
-            <div className={`${
-                showConfirmLockBoard===false
-                ? "hidden"
-                : ""
-            }`}>
-     
-                <div className="confirmboard" >
-                    <h2 className="font-xl font-bold">Xác nhận  {`${proper.Status===true ? "khóa" : "gỡ khóa"}`} người dùng</h2>
-                    <p className="text-xs text-gray-500 mt-1"> Bạn có chắc rằng muốn {`${proper.Status===true ? "khóa" : "gỡ khóa"}`} người dùng {proper.Name as string} ?</p>
-                    <div className="float-right mt-20 flex">
-                        <Button variant="contained" onClick={()=>setShowConfirmLockBoard(false)}>Hủy Bỏ</Button>
-                        <div className="ml-2"><Button variant="contained" color="secondary" onClick={()=>{lockUser(proper?.Id, proper?.Status); 
-                            setShowConfirmLockBoard(false)}}>Đồng ý</Button></div>
-                    </div>
-                </div>
+            <div>
+              <Dialog
+                open={showConfirmLockBoard}
+                onClose={handleClosingConfirmBoard}
+                fullWidth
+              >
+                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                  Xác nhận xóa
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText className="text-sm text-gray-500">
+                    Bạn có chắc rằng muốn {`${proper?.Status===true ? "khóa " : "gỡ khóa "}`} người dùng {proper?.Name} ?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button autoFocus onClick={handleClosingConfirmLockBoard} color="default" variant="contained">
+                    Hủy bỏ
+                  </Button>
+                  <Button onClick={()=>{lockUser(proper?.Id as number, proper?.Status); handleClosingConfirmLockBoard()}} color="secondary" variant="contained">
+                    Đồng ý
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
-        )
+          );
     }
 
 
@@ -242,7 +279,8 @@ const UserManage:React.FC = () => {
         Status={proper?.Status as boolean} Comments={proper?.Comments as number}
         Name={proper?.Name as string} Animes={proper?.Animes as number}
         Episodes={proper?.Episodes as number} FollowingAnimes={proper?.FollowingAnimes as number}
-        createDay={proper?.createDay as string} updateDay={proper?.updateDay as string} />
+        createDay={proper?.createDay as string} updateDay={proper?.updateDay as string}
+         />
 
         <ConfirmLockBoard Id={ proper?.Id as number } Avt={proper?.Avt as string} 
         Email={proper?.Email as string} FaceBook={proper?.FaceBook as string} 
@@ -283,17 +321,19 @@ const UserManage:React.FC = () => {
 
                     return (   
             <div key={bar.Id}  className="flex justify-between mt-5
-            py-3 px-6 bg-white rounded-xl">
-            <img src={bar.Avt} alt="#" />
-            <h3 className="mt-4 text-left w-48 text-sm">{bar.Email}</h3>
-            <h3 className="mt-4 text-left w-48 text-sm hidden">{bar.Name}</h3>
-            <h3 className="mt-4 mr-14 text-sm">{bar.updateDay}</h3>
-            <h3 className="mt-4 mr-10 text-sm">{bar.createDay}</h3>
+            py-3 px-3 bg-white rounded-xl">
+            <div className="flex w-52 mr-2"> 
+                <img src={bar.Avt} alt="#" className="inline mr-4" />
+                <h3 className="mt-4 text-left text-sm">{bar.Email}</h3>
+            </div>
+            <div className="flex ml-4">
+            <h3 className="mt-4 text-sm text-left w-32 ">{bar.updateDay}</h3>
+            <h3 className="mt-4 text-sm text-left ml-4 w-32  ">{bar.createDay}</h3>
             <h3  className={`
                 mt-4 text-sm
                 ${bar.Status===true
-                    ? "text-green-500 font-semibold mr-12"
-                    : "text-red-500 font-semibold mr-20"
+                    ? "text-green-500 text-left w-36 ml-4  font-semibold "
+                    : "text-red-500 text-left w-36 ml-4 font-semibold"
                 }`}>
                 {`•
                  ${bar.Status===true
@@ -302,6 +342,7 @@ const UserManage:React.FC = () => {
                  }
                 `}
             </h3>
+            </div>
             <div className="flex items-center relative right-0">
                 <img src={ReSearch} className="cursor-pointer" alt="/" 
                 onClick={()=>{
@@ -312,7 +353,7 @@ const UserManage:React.FC = () => {
                     setShowConfirmLockBoard(true);
                     setProper(bar);}} />
                 <img src={Delete} className="cursor-pointer" alt="/" onClick={()=>{
-                    setShowConfirmBoard(true);
+                    handleOpenConfirmBoard();
                     setProper(bar);
                     }} />
             </div>

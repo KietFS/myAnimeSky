@@ -13,7 +13,7 @@ const TypicalUsers:React.FC<Props> = ({Img, Name, Like, Cmt}) => {
     return (
         <div className="mb-6">
             <div className="flex">
-                <img className="" src={Img} />
+                <img className="rounded-full" src={Img} alt="/" />
                 <div className="ml-2">
                     <h3 className="font-bold">{Name}</h3>
                     <div className="flex">

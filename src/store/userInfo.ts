@@ -1,7 +1,7 @@
 import { skipValidation } from "yargs";
-import img1 from "../images/AvtImg1.svg";
-import img2 from "../images/AvtImg2.svg";
-import thumbnail1 from "../images/thumbnail.svg";
+import img1 from "../images/AvtImg1.jpg";
+import img2 from "../images/AvtImg2.jpg";
+import thumbnail1 from "../images/thumbnail.jpg";
 
 export type user ={
     Id:number;

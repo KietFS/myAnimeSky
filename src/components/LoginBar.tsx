@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import Bell from "../images/Bell.svg";
-import Avt from "../images/Avatar.svg";
-import Vector from "../images/Vector.svg"
+import Avt from "../images/Avatar.jpg";
+import Vector from "../images/Vector.jpg"
 import { auth,provider } from '../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserEmail, selectUserName, selectUserPhoto, setUserLogin, setSignOut } from '../userSlice';

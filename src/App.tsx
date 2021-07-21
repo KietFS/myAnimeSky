@@ -16,10 +16,10 @@ function App() {
     <div className="app-container">
     <Router>
         <SideBar />
+        <Route path="/" exact>
+          <Homepage />
+        </Route>
         <Switch>
-            <Route path="/" exact>
-                <Homepage />
-            </Route>
             <Route path="/userpage">
                 <UserPage />
             </Route>
