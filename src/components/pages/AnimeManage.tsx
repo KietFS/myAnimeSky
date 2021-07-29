@@ -2,14 +2,14 @@ import React from 'react'
 import { FaSearch } from 'react-icons/fa';
 import { FaSortAlphaDown } from 'react-icons/fa';
 import { useState } from 'react';
-import animes from '../store/animesInfo';
-import Lock from "../images/lock.svg";
-import Delete from "../images/delete.svg";
-import ReSearch from "../images/userdetailsearch.svg"
-import FirstImg from "../images/1.jpg";
-import SecondImg from "../images/2.jpg"
+import animes from '../../store/animesInfo';
+import Lock from "../../images/lock.svg";
+import Delete from "../../images/delete.svg";
+import ReSearch from "../../images/userdetailsearch.svg"
+import FirstImg from "../../images/1.jpg";
+import SecondImg from "../../images/2.jpg"
 import {Button} from "@material-ui/core";
-import CardImg from "../images/CardImg.jpg";
+import CardImg from "../../images/CardImg.jpg";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -38,10 +38,6 @@ interface Props{
     createAt: string;
     updateAt: string;
 }
-
-
-
-
 
 const AnimeManage = () => {
 
@@ -319,7 +315,7 @@ const handleClosing = () => {
                             mt-4 text-sm
                             ${animeBar.Status===false
                             ? "text-yellow-500 font-semibold w-32 mr-24 pr-2"
-                            : "text-green-500 font-semibold w-32 mr-24 pr-6"
+                            : "text-green-500 font-semibold w-32 mr-24 pr-4"
                             }`}>
                             {`•
                              ${animeBar.Status===false

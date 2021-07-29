@@ -1,9 +1,9 @@
 import React from 'react';
-import  HomeIcon  from '../images/Home-icon.svg';
-import Users from '../images/Users.svg';
-import Playlist from '../images/Playlist.svg';
-import Connect from '../images/Conect.svg';
-import Settings from '../images/Settings.svg';
+import  HomeIcon  from '../../images/Home-icon.svg';
+import Users from '../../images/Users.svg';
+import Playlist from '../../images/Playlist.svg';
+import Connect from '../../images/Conect.svg';
+import Settings from '../../images/Settings.svg';
 import {
   BrowserRouter as Router,
   Switch,

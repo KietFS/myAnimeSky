@@ -1,12 +1,12 @@
 import React from 'react'
 import { FaSearch, FaSortAlphaDown } from 'react-icons/fa';
 import { useState,useEffect } from 'react';
-import users from "../store/userInfo";
-import Lock from "../images/lock.svg";
-import Delete from "../images/delete.svg";
-import ReSearch from "../images/userdetailsearch.svg"
+import users from '../../store/userInfo';
+import Lock from "../../images/lock.svg";
+import Delete from "../../images/delete.svg";
+import ReSearch from "../../images/userdetailsearch.svg"
 import Button from "@material-ui/core/Button"
-import CardImg from "../images/CardImg.jpg";
+import CardImg from "../../images/CardImg.jpg";
 import { number } from 'yargs';
 import { stringify } from 'querystring';
 import { Bar } from 'react-chartjs-2';
@@ -23,23 +23,7 @@ import { Card } from '@material-ui/core';
 interface Props {
     Id:number
     Avt: string
-    Name: string
-    Email: string
-    FaceBook: string
-    Status: boolean
-    Comments: number;
-    Animes: number;
-    Episodes: number;
-    FollowingAnimes: number;
-    createDay: string;
-    updateDay: string;
-}
 
-
-
-interface newProps {
-    Id:number
-    Avt: string
     Name: string
     Email: string
     FaceBook: string

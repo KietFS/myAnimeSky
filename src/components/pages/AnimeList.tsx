@@ -1,13 +1,13 @@
 import React from 'react'
-import "../index.css";
-import Bell from "../images/Bell.jpg";
-import Avt from "../images/Avatart.jpg";
-import Vector from "../images/Vector.jpg";
-import Img1 from "../images/image_1.jpg";
+import "../../index.css";
+import Bell from "../../images/Bell.svg"
+import Avt from "../../images/Avatart.jpg";
+import Vector from "../../images/Vector.jpg";
+import Img1 from "../../images/image_1.jpg";
 import LastUpdatedAnimes from "./LastUpdatedAnimes";
 import MostViewsAnimed from "./MostViewsAnimes";
-import FirstImg from "../images/1.jpg";
-import SecondImg from "../images/2.jpg";
+import FirstImg from "../../images/1.jpg";
+import SecondImg from "../../images/2.jpg";
 import LoginBar from './LoginBar';
 const AnimeList = () => {
     return (

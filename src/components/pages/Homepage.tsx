@@ -1,14 +1,14 @@
 import React from 'react'
-import Summary from "./pages/Summary";
-import AnimeList from "./pages/AnimeList";
+import Summary from "./Summary";
+import AnimeList from "./AnimeList";
 import { Redirect } from 'react-router';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { RootState } from '../state';
+import { RootState } from '../../state';
 import { useEffect } from 'react';
-import SideBar from './pages/SideBar';
-import { setSuccess } from '../state/actions/authActions';
-import Message from './UI/Message';
+import SideBar from './SideBar';
+import { setSuccess } from '../../state/actions/authActions';
+import Message from '../UI/Message';
 const Homepage:React.FC = () => {
 
     const { user, needVerification, success } = useSelector((state: RootState) => state.auth);

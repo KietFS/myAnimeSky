@@ -2,18 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {Provider} from "react-redux";
-import {store} from "../src/store/store";
 import {HashRouter} from  "react-router-dom"
+import firebase from "./firebase";
+import store from "./state/index";
+import { Provider } from 'react-redux';
+import 'bulma/css/bulma.min.css';
 
 ReactDOM.render(
-  <Provider store={store}>
   <React.StrictMode>
+    <Provider store={store}>
     <HashRouter>
     <App />
     </HashRouter>
-  </React.StrictMode>
-  </Provider>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

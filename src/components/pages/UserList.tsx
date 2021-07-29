@@ -1,14 +1,15 @@
 import React from 'react'
-import Bell from "../images/Bell.jpg";
-import Avt from "../images/Avatart.jpg";
-import Vector from "../images/Vector.jpg";
-import Avt1 from "../images/AvtImg1.jpg";
-import Avt2 from "../images/AvtImg2.jpg";
+import Bell from "../../images/Bell.jpg";
+import Avt from "../../images/Avatart.jpg";
+import Vector from "../../images/Vector.jpg";
+import Avt1 from "../../images/AvtImg1.jpg";
+import Avt2 from "../../images/AvtImg2.jpg";
 import TypicalUsers from "./TypicalUsers";
 import AddictedUsers from "./AddictedUsers";
 import LoginBar from './LoginBar';
-import users from '../store/userInfo';
+import users from '../../store/userInfo';
 import {useState} from "react";
+import "../../index.css";
 
 
 const newUser=users;
