@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import './index.css';
+import "./index.css";
 
 import Homepage from './components/pages/Homepage';
 import SignIn from './components/pages/SignIn';
@@ -11,7 +11,6 @@ import Loader from './components/UI/Loader';
 import firebase from "./firebase";
 import { getUserById, setLoading, setNeedVerification } from './state/actions/authActions';
 import { RootState } from './state';
-import SignUp from './components/pages/SignUp';
 import { UserPage } from './components/pages/UserPage';
 import AnimesPage from './components/pages/AnimesPage';
 
@@ -47,7 +46,6 @@ const App: FC = () => {
     <BrowserRouter>
     <PublicRoute path="/signin" component={SignIn} />
       <Switch>
-        <PublicRoute path="/signup" component={SignUp} />
         <PrivateRoute path="/" component={Homepage} exact />
         <PrivateRoute path="/userpage" component={UserPage} exact />
         <PrivateRoute path="/animepage" component={AnimesPage} exact />

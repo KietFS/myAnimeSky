@@ -308,7 +308,7 @@ const handleClosing = () => {
                     return (
                         <div key={animeBar.Id}  className="flex justify-between mt-5
                         py-3 px-6 bg-white rounded-xl">
-                            <img src={animeBar.Thumbnail} alt="#" />
+                            <img src={animeBar.Thumbnail} alt="#" width={45} height={45} />
                             <h3 className="mt-4 text-left w-56 ml-4 text-sm">{animeBar.Name}</h3>
                             <h3 className="mt-4 text-center w-48 mr-12 text-sm">{animeBar.Episodes}/{animeBar.amoutEpisodes}</h3>
                             <h3  className={`

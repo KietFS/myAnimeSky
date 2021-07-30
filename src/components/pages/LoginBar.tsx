@@ -25,7 +25,7 @@ const LoginBar = () => {
         <div className ="flex float-right items-center">
             <div className="flex pr-6 items-center" >
                 <img className="mr-6 cursor-pointer" src={Bell} />
-                <Avatar className="mr-6 cursor-pointer" src="https://avatars.githubusercontent.com/u/72301026?s=400&u=ef8aaf5a9602c549f03905b4ad0fd8facbbc56c4&v=4" />
+                <Avatar className="mr-6 cursor-pointer"  src={Avt}/>
            <button className="logout-button" onClick={logoutClickHandler}>Sign Out</button>
             </div>
         </div>
